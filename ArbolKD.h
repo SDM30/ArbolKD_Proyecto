@@ -2,6 +2,7 @@
 #define __ARBOLKD__H__
 #include "NodoKD.h"
 #include <iostream>
+#include <queue>
 
 class ArbolKD
 {

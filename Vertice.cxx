@@ -29,3 +29,9 @@ double Vertice::distanciaEuclidiana(Vertice val2) {
          sqrt(pow(this->y - val2.obtenerY(), 2)) + 
          sqrt(pow(this->z - val2.obtenerZ(), 2));
 }
+
+// Sobrecarga del operador << para imprimir un vértice
+std::ostream& operator<<(std::ostream& os, const Vertice& v) {
+    os << "Vertice(ID: " << v.ind_ver << ", X: " << v.x << ", Y: " << v.y << ", Z: " << v.z << ")";
+    return os;
+}

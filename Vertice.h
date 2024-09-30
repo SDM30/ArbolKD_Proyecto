@@ -1,5 +1,6 @@
 #ifndef __VERTICE__H__
 #define __VERTICE__H__
+#include <iostream> 
 
 class Vertice {
 private:
@@ -18,6 +19,9 @@ public:
   void fijarY(double y);
   void fijarZ(double z);
   double distanciaEuclidiana(Vertice val2);
+
+  // Sobrecargar el operador << para imprimir los vértices
+  friend std::ostream& operator<<(std::ostream& os, const Vertice& v);
 };
 
 #endif
