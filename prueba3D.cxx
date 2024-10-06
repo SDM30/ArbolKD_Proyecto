@@ -5,7 +5,8 @@
 
 void pruebaIns(std::vector<Vertice>& puntos, ArbolKD& arbol);
 
-void pruebaDifHiperPlano(ArbolKD& arbol);
+void pruebaVecinoCercano(ArbolKD& arbol, Vertice punto);
+
 
 int main() {
     ArbolKD arbol;
@@ -55,22 +56,19 @@ int main() {
     std::cout << std::endl;
 
     // Probar la búsqueda del vecino más cercano
-    Vertice verticeBusqueda(0, 33, 26, 16);  // Punto de prueba para buscar el vecino más cercano
-    NodoKD* vecino = arbol.vecinoCercano(arbol.obtenerRaiz(), verticeBusqueda);
 
-    if (vecino != nullptr) {
-        std::cout << "Vecino más cercano al punto (" 
-                  << verticeBusqueda.obtenerX() << ", "
-                  << verticeBusqueda.obtenerY() << ", "
-                  << verticeBusqueda.obtenerZ() << ") es: ("
-                  << vecino->obtenerDato().obtenerX() << ", "
-                  << vecino->obtenerDato().obtenerY() << ", "
-                  << vecino->obtenerDato().obtenerZ() << ")" << std::endl;
-    } else {
-        std::cout << "No se encontró un vecino cercano." << std::endl;
-    }
+    //Caso 1: punto dentro del arbol
+    Vertice verticeBusqueda(0, 100, 100, 100);  // Punto de prueba para buscar el vecino más cercano
+    pruebaVecinoCercano(arbol, verticeBusqueda);
+    
+    //Caso 2: punto cercano a vertice en el arbol
+    Vertice verticeBusqueda2(0, 36, 29, 28);
+    pruebaVecinoCercano(arbol, verticeBusqueda2);
 
-    pruebaDifHiperPlano(arbol);
+    //Caso 3: diferente hiperplano
+    Vertice verticeBusqueda3(0, 24, 25, 49);
+    pruebaVecinoCercano(arbol, verticeBusqueda3);
+
 
     return 0;
 }
@@ -88,26 +86,19 @@ void pruebaIns(std::vector<Vertice>& puntos, ArbolKD& arbol) {
     }
 }
 
-void pruebaDifHiperPlano(ArbolKD& arbol) {
+void pruebaVecinoCercano(ArbolKD& arbol, Vertice punto) {
+    NodoKD* vecinoOtroHiperplano = arbol.vecinoCercano(arbol.obtenerRaiz(), punto);
 
-    // Insertar puntos en el árbol
-    arbol.insertar(Vertice(0, 10, 5, 5));
-    arbol.insertar(Vertice(0, 15, 10, 10));
-    arbol.insertar(Vertice(0, 20, 5, 5)); // Punto en el otro lado del hiperplano
-    arbol.insertar(Vertice(0, 30, 10, 10)); // Nodo que se busca primero en la búsqueda normal
-    
-    // Buscar vecino más cercano al punto (25, 5, 5)
-    Vertice puntoBusqueda(0, 25, 5, 5);
-    NodoKD* vecino = arbol.vecinoCercano(arbol.obtenerRaiz(), puntoBusqueda);
-    
-    // Imprimir el resultado
-    if (vecino) {
-        std::cout << "Vecino más cercano al punto (" << puntoBusqueda.obtenerX() << ", " 
-                  << puntoBusqueda.obtenerY() << ", " << puntoBusqueda.obtenerZ() << ") es: ("
-                  << vecino->obtenerDato().obtenerX() << ", " 
-                  << vecino->obtenerDato().obtenerY() << ", " 
-                  << vecino->obtenerDato().obtenerZ() << ")" << std::endl;
+    if (vecinoOtroHiperplano != nullptr) {
+        std::cout << "Vecino más cercano al punto (" 
+                << punto.obtenerX() << ", "
+                << punto.obtenerY() << ", "
+                << punto.obtenerZ() << ") es: ("
+                << vecinoOtroHiperplano->obtenerDato().obtenerX() << ", "
+                << vecinoOtroHiperplano->obtenerDato().obtenerY() << ", "
+                << vecinoOtroHiperplano->obtenerDato().obtenerZ() << ")" << std::endl;
     } else {
         std::cout << "No se encontró un vecino cercano." << std::endl;
     }
 }
+
