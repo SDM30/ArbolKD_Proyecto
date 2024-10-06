@@ -241,7 +241,7 @@ void ArbolKD::nivelOrden() {
         while(!cola.empty()) {
             nodo = cola.front();
             cola.pop();
-            std::cout << nodo->obtenerDato() << " ";
+            std::cout << nodo->obtenerDato() << std::endl;
 
             if (nodo->obtenerHijoIzq() != NULL) {
                 cola.push(nodo->obtenerHijoIzq());
