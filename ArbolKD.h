@@ -21,7 +21,7 @@ public:
     NodoKD *insertarRec(NodoKD* nodo, Vertice val, bool& insertado, char dimension);
     NodoKD *cercano(NodoKD* n1, NodoKD* n2, Vertice val);
     NodoKD *vecinoCercano(NodoKD* nodo, Vertice val);
-    void vecinoCercanoRec(NodoKD* nodo, Vertice val, char dimension, NodoKD*& mejorNodo, int& mejorDist);
+    void vecinoCercanoRec(NodoKD* nodo, Vertice val, char dimension, NodoKD*& mejorNodo, double& mejorDist);
     //Recorridos
     void preOrden();
     void preOrden(NodoKD *nodo);
